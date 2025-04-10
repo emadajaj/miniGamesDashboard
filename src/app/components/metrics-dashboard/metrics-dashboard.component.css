@@ -1,0 +1,88 @@
+.metrics-dashboard {
+  padding: 24px;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+/* Media query for desktop layout (3 columns) */
+@media (min-width: 768px) {
+  .metrics-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .wide-card {
+    grid-column: span 1;
+  }
+}
+
+.metric-card {
+  background-color: var(--background-color-secondary);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+  transition: all 0.3s ease;
+  height: 100%;
+  overflow: hidden;
+}
+
+.metric-card:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+}
+
+.metric-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.metric-value {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.number {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: left;
+  color: var(--text-color-primary);
+}
+
+.metric-label {
+  font-size: 20px;
+  text-align: right;
+  color: var(--text-color-secondary);
+  margin-top: auto;
+}
+
+/* Category specific styling */
+.user-metric {
+  border-top: 3px solid #4285F4;
+}
+
+.competition-metric {
+  border-top: 3px solid #34A853;
+}
+
+.financial-metric {
+  border-top: 3px solid #9C27B0;
+}
+.balance-metric {
+  border-top: 3px solid #b0a227;
+}
+
+/* Active status styling */
+.active-status {
+  display: flex;
+  align-items: center;
+}
+
+.status-icon {
+  font-size: 32px;
+  color: #FF9800;
+}

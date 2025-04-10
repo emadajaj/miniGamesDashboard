@@ -8,12 +8,6 @@
       "schematics": {
         "@schematics/angular:component": {
           "standalone": false
-        },
-        "@schematics/angular:directive": {
-          "standalone": false
-        },
-        "@schematics/angular:pipe": {
-          "standalone": false
         }
       },
       "root": "",
@@ -37,7 +31,9 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.css",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": []
           },

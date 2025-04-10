@@ -1,0 +1,90 @@
+
+<div class="game-table-container">
+  <table class="game-table">
+    <thead>
+      <tr>
+        <th *ngFor="let column of standardColumns">{{ column.name }}</th>
+      </tr>
+      <!-- Filter row directly below headers -->
+      <tr class="filter-row">
+        <td>
+        </td>
+        <td> </td>
+        <td></td>
+        <td>
+        </td>
+        <td></td>
+        <td>
+        </td>
+        <td>
+          <select class="filter-select" [(ngModel)]="filter.country" (ngModelChange)="updatePaginatedData()">  
+            <option value="">All Countries</option>
+            <option *ngFor="let key of (country | keyvalue)" [value]="key.key">{{ key.value }}
+          </select>
+        </td>
+        <td></td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of paginatedData">
+        <td *ngFor="let column of standardColumns">
+          <ng-container [ngSwitch]="column.type">
+            
+            <!-- Game Type with colored badge -->
+            <span *ngSwitchCase="'text'" [class.game-type-badge]="column.key === 'created'">
+              
+              <!-- Game Result with colored text -->
+              <!-- <span *ngIf="column.key === 'isBlocked'" 
+                    [ngClass]="{
+                      'success-text': item['isBlocked'] === true, 
+                      'failure-text': item['isBlocked'] === false
+                    }">
+                {{ getDisplayValue(item, column) }}
+              </span> -->
+              
+              <!-- Regular text for other text columns -->
+              <span>
+                {{ getDisplayValue(item, column) }}
+              </span>
+            </span>
+            
+            <!-- Score columns with number formatting -->
+            <span *ngSwitchCase="'number'" 
+                  [class.score-value]="column.key.includes('Score')">
+              {{ getDisplayValue(item, column) }}
+            </span>
+
+            <span *ngSwitchCase="'button'" >
+              <span *ngIf="column.key === 'action'">
+                <button style="background-color: var(--card-bg); border: 0; border-radius: 5px; padding: 5px; margin-right: 5px;"><i style="font-size: 22px; color: var(--text-color-primary);" class="fa-solid fa-add"></i></button>
+              </span>
+              <!-- <span *ngIf="column.key === 'isBlocked'">
+                {{ getDisplayValue(item, column) }}
+              </span> -->
+            </span>
+
+            <span *ngSwitchCase="'image'" >
+              <span *ngIf="column.key === 'productImage'">
+                <img [src]="item.productImage">
+              </span>
+              <span *ngIf="column.key === 'available'" 
+                    [ngClass]="{
+                      'free-badge': item['available'] === true, 
+                      'paid-badge': item['available'] === false, 
+                    }">
+                    <span *ngIf="item['available'] == true"  >✔</span>
+                    <span *ngIf="item['available'] == false"  >✗</span>
+              </span>
+              <!-- <span *ngIf="column.key === 'isBlocked'">
+                {{ getDisplayValue(item, column) }}
+              </span> -->
+            </span>
+            
+            <span *ngSwitchDefault>{{ getDisplayValue(item, column) }}</span>
+          </ng-container>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+

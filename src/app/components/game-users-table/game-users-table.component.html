@@ -1,0 +1,177 @@
+<app-pop-up #popup [message]="popupMessage" (yesClicked)="yesAction()" (noClicked)="popup.hide()"></app-pop-up>
+
+<div class="game-table-container">
+  <table class="game-table">
+    <thead>
+      <tr>
+        <th *ngFor="let column of standardColumns">{{ column.name }}</th>
+      </tr>
+      <!-- Filter row directly below headers -->
+      <tr class="filter-row">
+        <td>
+        </td>
+        <td>
+          <input type="text" [placeholder]="'Filter by ' + 'User ID'" class="filter-input"
+          [(ngModel)]="filter.id" 
+          (ngModelChange)="updatePaginatedData()"
+           >
+        </td>
+        <td>
+          <input type="text" [placeholder]="'Filter by ' + 'User Name'" class="filter-input"
+          [(ngModel)]="filter.name" 
+          (ngModelChange)="updatePaginatedData()"
+           >
+        </td>
+        <td>
+          <select class="filter-select" [(ngModel)]="filter.country" (ngModelChange)="updatePaginatedData()">  
+            <option value="">All Countries</option>
+            <option *ngFor="let key of (country | keyvalue)" [value]="key.key">{{ key.value }}
+          </select>
+        </td>
+        <td>
+          <input 
+          type="text" 
+          [placeholder]="'Min Score'" 
+          [(ngModel)]="filter.minScore"
+          (ngModelChange)="updatePaginatedData()"
+          class="filter-input">
+          <input 
+          type="text" 
+          [placeholder]="'Max Score'" 
+          [(ngModel)]="filter.maxScore"
+          (ngModelChange)="updatePaginatedData()"
+          class="filter-input">
+        </td>
+        <td></td>
+        <td>
+        </td>
+        <td></td>
+        <td>
+          <div class="date-input-container1">
+              <input class="lableText filter-date" 
+              [type]="isDateInput1 ? 'date' : 'text'" 
+              (click)="toggleInputType1()" 
+              placeholder="Start Date" 
+              [(ngModel)]="filter.MinCreatedAt"
+              (ngModelChange)="updatePaginatedData()"/>
+          </div>
+          <div class="date-input-container2">
+            <input class="lableText filter-date" 
+            [type]="isDateInput2 ? 'date' : 'text'" 
+            (click)="toggleInputType2()" 
+            placeholder="End Date" 
+            [(ngModel)]="filter.MaxCreatedAt"
+            (ngModelChange)="updatePaginatedData()"/>
+          </div>
+        </td>
+          <td>
+            <div class="date-input-container1">
+                <input class="lableText filter-date" 
+                [type]="isDateInput1 ? 'date' : 'text'" 
+                (click)="toggleInputType1()" 
+                placeholder="Start Date" 
+                [(ngModel)]="filter.MinCreatedAt"
+                (ngModelChange)="updatePaginatedData()"/>
+            </div>
+            <div class="date-input-container2">
+              <input class="lableText filter-date" 
+              [type]="isDateInput2 ? 'date' : 'text'" 
+              (click)="toggleInputType2()" 
+              placeholder="End Date" 
+              [(ngModel)]="filter.MaxCreatedAt"
+              (ngModelChange)="updatePaginatedData()"/>
+            </div>
+        </td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of paginatedData">
+        <td *ngFor="let column of standardColumns">
+          <ng-container [ngSwitch]="column.type">
+                        <span *ngSwitchCase="'date'">{{ getDisplayValue(item, column) }}</span>
+            
+            <!-- Game Type with colored badge -->
+            <span *ngSwitchCase="'text'" [class.game-type-badge]="column.key === 'created'">
+              <span *ngIf="column.key === 'isBlocked'" 
+                    [ngClass]="{
+                      'free-badge': item['isBlocked'] === true, 
+                      'paid-badge': item['isBlocked'] === false, 
+                    }">
+                {{ getDisplayValue(item, column) }}
+              </span>
+              
+              <!-- Game Result with colored text -->
+              <!-- <span *ngIf="column.key === 'isBlocked'" 
+                    [ngClass]="{
+                      'success-text': item['isBlocked'] === true, 
+                      'failure-text': item['isBlocked'] === false
+                    }">
+                {{ getDisplayValue(item, column) }}
+              </span> -->
+              
+              <!-- Regular text for other text columns -->
+              <span>
+                {{ getDisplayValue(item, column) }}
+              </span>
+            </span>
+            
+            <!-- Score columns with number formatting -->
+            <span *ngSwitchCase="'number'" 
+                  [class.score-value]="column.key.includes('Score')">
+              {{ getDisplayValue(item, column) }}
+            </span>
+
+            <span *ngSwitchCase="'button'" >
+              <span *ngIf="column.key === 'gems'">
+                <button class="styled-button-Gems">Gems</button>
+              </span>
+              <span *ngIf="column.key === 'awards'">
+                <button class="styled-button-Awards">Awards</button>
+              </span>
+              <span *ngIf="column.key === 'action'">
+                <button (click)="openPopup(item, 'reset user score')" style="background-color: var(--card-bg); border: 0; border-radius: 5px; padding: 5px; margin-right: 5px;"><i style="font-size: 22px; color: var(--text-color-primary);" class="fa-solid fa-rotate-right"></i></button>
+                <button (click)="openPopup(item, 'reset user claims')" style="background-color: var(--card-bg); border: 0; border-radius: 5px; padding: 5px; margin-right: 5px;"><i style="font-size: 22px; color: var(--text-color-primary);" class="fa-solid fa-rotate"></i></button>
+                <button (click)="openPopup(item, 'block')" style="background-color: var(--card-bg); border: 0; border-radius: 5px; padding: 5px; margin-right: 5px;"><i style="font-size: 22px; color: var(--text-color-primary);" class="fa-solid fa-solid fa-lock"></i></button>
+                <button (click)="openPopup(item, 'unblock')" style="background-color: var(--card-bg); border: 0; border-radius: 5px; padding: 5px;"><i style="font-size: 22px; color: var(--text-color-primary);" class="fa-solid fa-solid fa-lock-open"></i></button>
+              </span>
+              <!-- <span *ngIf="column.key === 'isBlocked'">
+                {{ getDisplayValue(item, column) }}
+              </span> -->
+            </span>
+            
+            <span *ngSwitchDefault>{{ getDisplayValue(item, column) }}</span>
+          </ng-container>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Pagination controls -->
+<div class="pagination-container">
+  <div class="page-info">
+  </div>
+  <div class="pagination-controls">
+    <ng-container *ngIf="(currentPage$ | async) as currentPage">
+    <button class="page-button" [disabled]="currentPage === 1" (click)="goToPage(1)">&laquo;</button>
+    <button class="page-button" [disabled]="currentPage === 1" (click)="previousPage()">&lsaquo;</button>
+    <ng-container *ngIf="(pagesCount | async) as totalPages">
+      <ng-container *ngFor="let page of [].constructor(totalPages || 0); let i = index">
+        <button *ngIf="i + 1 <= 3 || i + 1 > totalPages - 2 || (i + 1 >= currentPage - 1 && i + 1 <= currentPage + 1)"
+                class="page-button" 
+                [class.active]="currentPage === (i + 1)"
+                (click)="goToPage(i + 1)">
+          {{ i + 1 }}
+        </button>
+        <button *ngIf="i + 1 === 4 && currentPage > 4" class="page-button page-ellipsis">...</button>
+        <button *ngIf="i + 1 === totalPages - 2 && currentPage < totalPages - 3" class="page-button page-ellipsis">...</button>
+      </ng-container>
+    </ng-container>
+    
+    <button class="page-button" [disabled]="(currentPage$ | async) === (pagesCount | async)" (click)="nextPage()">&rsaquo;</button>
+    <button class="page-button" [disabled]="(currentPage$ | async) === (pagesCount | async)" (click)="goToLastPage()">&raquo;</button>
+  </ng-container>
+  </div>
+  <div class="page-size">
+  </div>
+</div>

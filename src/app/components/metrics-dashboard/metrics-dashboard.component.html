@@ -1,0 +1,21 @@
+<div class="metrics-dashboard">
+  <div class="metrics-grid">
+    <div 
+      *ngFor="let metric of metrics" 
+      class="metric-card"
+      [ngClass]="[
+        getCategoryClass(metric.category),
+        metric.isHighlighted ? 'highlighted' : '',
+        metric.isWide ? 'wide-card' : ''
+      ]"
+    >
+      <div class="metric-content">
+        <div class="metric-value" [class.active-status]="metric.isActive">
+          <span *ngIf="!metric.isActive" class="number">{{ formatNumber(metric.value) }}</span>
+          <span *ngIf="metric.isActive" class="status-icon">⚡</span>
+        </div>
+        <div class="metric-label">{{ metric.label }}</div>
+      </div>
+    </div>
+  </div>
+</div>

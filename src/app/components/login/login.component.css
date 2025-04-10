@@ -1,0 +1,151 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: var(--background-color-primary);
+  padding: 20px;
+}
+
+.login-box {
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+  padding: 70px;
+  width: 100%;
+  max-width: 800px;
+  margin-bottom: 100px;
+}
+
+.login-title {
+  color: var(--text-color-primary);
+  font-size: 32px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.form-group {
+  margin-bottom: 30px;
+}
+
+input {
+  width: 100%;
+  padding: 16px 20px;
+  background-color: var(--background-color-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 18px;
+  color: var(--text-color-primary);
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--active-tab);
+  box-shadow: 0 0 0 3px rgba(63, 81, 181, 0.15);
+}
+
+.login-button {
+  width: 100%;
+  padding: 16px;
+  background: var(--active-tab);
+  color: var(--active-tab-color);
+  border: none;
+  border-radius: 6px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.2s;
+}
+
+.login-button:hover {
+  background: var(--child-tab);
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.login-header h1 {
+  color: #2d3748;
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.login-header p {
+  color: #718096;
+  font-size: 16px;
+}
+
+.form-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #4a5568;
+  cursor: pointer;
+}
+
+.remember-me input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  border: 2px solid #e2e8f0;
+}
+
+.forgot-password {
+  color: #667eea;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+.forgot-password:hover {
+  color: #764ba2;
+}
+
+.register-link {
+  text-align: center;
+  margin-top: 20px;
+  color: #4a5568;
+}
+
+.register-link a {
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.register-link a:hover {
+  color: #764ba2;
+}
+
+@media (max-width: 768px) {
+  .login-box {
+    padding: 50px 40px;
+    max-width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-box {
+    padding: 40px 30px;
+  }
+  
+  .login-title {
+    font-size: 28px;
+  }
+  
+  input, .login-button {
+    font-size: 16px;
+    padding: 14px;
+  }
+} 

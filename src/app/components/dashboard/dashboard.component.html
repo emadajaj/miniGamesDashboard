@@ -1,0 +1,67 @@
+<app-pop-up #popup [message]="popupMessage" (yesClicked)="yesAction()" (noClicked)="popup.hide()"></app-pop-up>
+<div class="dashboard-container">
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <h3>Games</h3>
+    </div>
+    <div class="nav-tabs">
+      <div class="nav-item" [class.active]="activeTab === 'metrics'" (click)="setActiveTab('metrics')">
+        <i class="tab-icon">📊</i>
+        <span class="tab-label">Metrics</span>
+      </div>
+      <div class="nav-item" [class.active]="activeTab === 'arcade'" (click)="setActiveTab('arcade')">
+        <i class="tab-icon">🎮</i>
+        <span class="tab-label">Games</span>
+      </div>
+
+      <div class="child-tabs" *ngIf="showArcadeChildren">
+        <div class="child-nav-item" *ngFor="let game of games"
+          [class.active]="activeChildTab === game.id"
+          (click)="setActiveTab(game.id)">
+          <i class="child-tab-icon">{{ game.icon }}</i>
+          <span class="child-tab-label">{{ game.name }}</span>
+        </div>
+      </div>
+      <div class="nav-item" [class.active]="activeTab === 'store'" (click)="setActiveTab('store')">
+        <i class="tab-icon"><img src="gamingStore.png"></i>
+        <span class="tab-label">Store</span>
+      </div>
+
+      <div class="child-tabs" *ngIf="showStoreChildren">
+        <div class="child-nav-item"
+          [class.active]="activeChildTab === 'Like Cards'"
+          (click)="setActiveTab('Like Cards')">
+          <img class="child-tab-icon" src="credit-card.png">
+          <span class="child-tab-label">Like Cards</span>
+        </div>
+      </div>
+      <div class="nav-item" [class.active]="activeTab === 'users'" (click)="setActiveTab('users')">
+        <i class="tab-icon">
+          <img src="gamer.png">
+        </i>
+        <span class="tab-label">Users</span>
+      </div>
+    </div>
+  </div>
+  <div class="content">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <h2 *ngIf="dontShowTheTitle()">{{ getTabTitle() }}</h2>
+      <div>
+        <div>
+          <button *ngIf="noTitleDontShowTheButtons()" class="styled-button-filters" style="margin-right: 10px;">Reset Filters</button>
+          <button *ngIf="noTitleDontShowTheButtons()" class="styled-button-attempts" style="margin-right: 10px;">Reset Attempts</button>
+          <button *ngIf="buttonsForGameUsersTable()" class="styled-button-attempts" style="margin-right: 10px;" (click)="openPopup('reset score')">Reset Score</button>
+        </div>
+        <button *ngIf="noTitleDontShowTheButtons()" class="styled-button-Excel" style="margin-top: 10px; margin-bottom: 10px;">Export Excel File</button>
+      </div>
+    </div>
+    
+    <div class="content-container">
+      <app-game-table *ngIf="isGameTab() && isGameSelected()" [game]="selectedGame!"></app-game-table>
+      <app-game-users-table *ngIf="activeTab === 'users'"></app-game-users-table> 
+      <app-like-cards-table *ngIf="activeTab === 'Like Cards'"></app-like-cards-table> 
+
+      <app-metrics-dashboard *ngIf="activeTab === 'metrics'"></app-metrics-dashboard>
+    </div>
+  </div>
+</div>

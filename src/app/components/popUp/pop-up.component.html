@@ -1,0 +1,9 @@
+<div class="popup" *ngIf="isVisible">
+  <div class="popup-content">
+    <p style="margin-bottom: 30px;">{{ message }}</p>
+    <div class="popup-buttons">
+      <button (click)="onYes()" class="button" >Yes</button>
+      <button (click)="onNo()" class="button">No</button>
+    </div>
+  </div>
+</div>
