@@ -1,0 +1,10 @@
+<div class="popup" *ngIf="isVisible">
+  <div class="popup-content">
+    <p style="margin-bottom: 30px;">{{message}}<thead></thead></p>
+    <input [(ngModel)]="inputPrice" type="number" placeholder="Enter price here">
+    <div class="popup-buttons">
+      <button (click)="onYes()" class="button-yes" >Yes</button>
+      <button (click)="onNo()" class="button-no">No</button>
+    </div>
+  </div>
+</div>

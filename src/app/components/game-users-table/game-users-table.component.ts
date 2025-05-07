@@ -91,19 +91,19 @@ export class GameUsersTableComponent implements OnInit, OnChanges {
       'bahrain' : 'Bahrain',
 
     };
-  filter = {
-    id: '',
-    name:'',
-    country:'',
-    maxScore: '',
-    minScore:'',
-    maxTotalAttempts:'',
-    minTotalAttempts:'',
-    gameType:'',
-    MinCreatedAt:'',
-    MaxCreatedAt:'',
-    gameResult:''
-  };
+    filter = {
+      id: '',
+      name:'',
+      country:'',
+      maxScore: '',
+      minScore:'',
+      maxTotalAttempts:'',
+      minTotalAttempts:'',
+      gameType:'',
+      MinCreatedAt:'',
+      MaxCreatedAt:'',
+      gameResult:''
+    };
   type: string = 'date';
     // Standard columns for all games
     standardColumns: GameColumn[] = [

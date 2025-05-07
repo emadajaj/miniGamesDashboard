@@ -58,10 +58,10 @@ export class GamesService {
     "https://extensions-test.challengex.app/api/basket-ball-game",
     "https://extensions-test.challengex.app/api/foot-ball-game",
     "https://extensions-test.challengex.app/api/helxi-jumb-game",
+    "https://extensions-test.challengex.app/api/zig-zag-game",
     "https://extensions-test.challengex.app/api/crazy-golf-game",
     "https://extensions-test.challengex.app/api/riddle-room-game",
     "https://extensions-test.challengex.app/api/little-shroomy-game",
-    "https://extensions-test.challengex.app/api/zig-zag-game",
     "https://extensions-test.challengex.app/api/car-game",
     "https://extensions-test.challengex.app/api/ice-dash-game"
   ]
@@ -73,7 +73,7 @@ export class GamesService {
       columns: this.standardColumns,
       page: this.fetchGamePageNumber(this.apiS[0],filter),
       data: this.fetchAllGamesAttempts(filter,1,this.apiS[0]),
-      api: "https://extensions.challengex.app/api/unlocky-game",
+      api: "https://extensions-test.challengex.app/api/unlocky-game",
       fetchData: (pageNumber: number, filters:any ) => this.fetchAllGamesAttempts(filters, pageNumber, this.apiS[0]) // Updated method
     },
     {
@@ -83,7 +83,7 @@ export class GamesService {
       columns: this.standardColumns,
       page: this.fetchGamePageNumber(this.apiS[1],filter),
       data: this.fetchAllGamesAttempts(filter,1,this.apiS[1]),
-      api: "https://extensions.challengex.app/api/number-in-between-game",
+      api: "https://extensions-test.challengex.app/api/number-in-between-game",
       fetchData: (pageNumber: number , filters:any ) => this.fetchAllGamesAttempts(filters, pageNumber, this.apiS[1]) // Updated method
     },
     {
@@ -93,7 +93,7 @@ export class GamesService {
       columns: this.standardColumns,
       page: this.fetchGamePageNumber(this.apiS[2],filter),
       data: this.fetchAllGamesAttempts(filter,1,this.apiS[2]),
-      api: "https://extensions.challengex.app/api/basket-ball-game",
+      api: "https://extensions-test.challengex.app/api/basket-ball-game",
       fetchData: (pageNumber: number, filters:any) => this.fetchAllGamesAttempts(filters, pageNumber, this.apiS[2]) // Updated method
     },
     {
@@ -103,7 +103,7 @@ export class GamesService {
       columns: this.standardColumns,
       page: this.fetchGamePageNumber(this.apiS[3],filter),
       data: this.fetchAllGamesAttempts(filter,1,this.apiS[3]),
-      api: "https://extensions.challengex.app/api/foot-ball-game",
+      api: "https://extensions-test.challengex.app/api/foot-ball-game",
       fetchData: (pageNumber: number , filters:any ) => this.fetchAllGamesAttempts(filters, pageNumber, this.apiS[3]) // Updated method
     },
     {
@@ -113,7 +113,7 @@ export class GamesService {
       columns: this.standardColumns,
       page: this.fetchGamePageNumber(this.apiS[4],filter),
       data: this.fetchAllGamesAttempts(filter,1,this.apiS[4]),
-      api: "https://extensions.challengex.app/api/helxi-jumb-game",
+      api: "https://extensions-test.challengex.app/api/helxi-jumb-game",
       fetchData: (pageNumber: number , filters:any ) => this.fetchAllGamesAttempts(filters, pageNumber, this.apiS[4]) // Updated method
     },
     {
@@ -123,7 +123,7 @@ export class GamesService {
       columns: this.standardColumns,
       page: this.fetchGamePageNumber(this.apiS[5],filter),
       data: this.fetchAllGamesAttempts(filter,1,this.apiS[5]),
-      api: "https://extensions.challengex.app/api/zig-zag-game",
+      api: "https://extensions-test.challengex.app/api/zig-zag-game",
       fetchData: (pageNumber: number , filters:any) => this.fetchAllGamesAttempts(filters, pageNumber, this.apiS[5]) // Updated method
     },
     {
@@ -133,7 +133,7 @@ export class GamesService {
       columns: this.standardColumns,
       page: this.fetchGamePageNumber(this.apiS[6],filter),
       data: this.fetchAllGamesAttempts(filter,1,this.apiS[6]),
-      api: "https://extensions.challengex.app/api/crazy-golf-game",
+      api: "https://extensions-test.challengex.app/api/crazy-golf-game",
       fetchData: (pageNumber: number , filters:any) => this.fetchAllGamesAttempts(filters, pageNumber, this.apiS[6]) // Updated method
     },
     {
@@ -143,7 +143,7 @@ export class GamesService {
       columns: this.standardColumns,
       page: this.fetchGamePageNumber(this.apiS[7],filter),
       data: this.fetchAllGamesAttempts(filter,1,this.apiS[7]),
-      api: "https://extensions.challengex.app/api/riddle-room-game",
+      api: "https://extensions-test.challengex.app/api/riddle-room-game",
       fetchData: (pageNumber: number  , filters:any) => this.fetchAllGamesAttempts(filters, pageNumber, this.apiS[7]) // Updated method
     },
     {
@@ -153,7 +153,7 @@ export class GamesService {
       columns: this.standardColumns,
       page: this.fetchGamePageNumber(this.apiS[8],filter),
       data: this.fetchAllGamesAttempts(filter,1,this.apiS[8]),
-      api: "https://extensions.challengex.app/api/little-shroomy-game",
+      api: "https://extensions-test.challengex.app/api/little-shroomy-game",
       fetchData: (pageNumber: number , filters:any) => this.fetchAllGamesAttempts(filters, pageNumber, this.apiS[8]) // Updated method
     },
     {
@@ -163,7 +163,7 @@ export class GamesService {
       columns: this.standardColumns,
       page: this.fetchGamePageNumber(this.apiS[9],filter),
       data: this.fetchAllGamesAttempts(filter,1,this.apiS[9]),
-      api: "https://extensions.challengex.app/api/car-game",
+      api: "https://extensions-test.challengex.app/api/car-game",
       fetchData: (pageNumber: number , filters:any) => this.fetchAllGamesAttempts(filters, pageNumber, this.apiS[9]) // Updated method
     },
     {
@@ -173,7 +173,7 @@ export class GamesService {
       columns: this.standardColumns,
       page: this.fetchGamePageNumber(this.apiS[10],filter),
       data: this.fetchAllGamesAttempts(filter,1,this.apiS[10]),
-      api: "https://extensions.challengex.app/api/ice-dash-game",
+      api: "https://extensions-test.challengex.app/api/ice-dash-game",
       fetchData: (pageNumber: number , filters:any) => this.fetchAllGamesAttempts(filters, pageNumber, this.apiS[10]) // Updated method
     }
   ];

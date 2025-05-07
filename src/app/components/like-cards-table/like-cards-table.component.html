@@ -1,4 +1,5 @@
 
+<app-pop-up-with-data #popup (yesClicked)="yesAction($event)" message="Add Product" (noClicked)="popup.hide()"></app-pop-up-with-data>
 <div class="game-table-container">
   <table class="game-table">
     <thead>
@@ -56,7 +57,7 @@
 
             <span *ngSwitchCase="'button'" >
               <span *ngIf="column.key === 'action'">
-                <button style="background-color: var(--card-bg); border: 0; border-radius: 5px; padding: 5px; margin-right: 5px;"><i style="font-size: 22px; color: var(--text-color-primary);" class="fa-solid fa-add"></i></button>
+                <button (click)="openPopup(item)" style="background-color: var(--card-bg); border: 0; border-radius: 5px; padding: 5px; margin-right: 5px;"><i style="font-size: 22px; color: var(--text-color-primary);" class="fa-solid fa-add"></i></button>
               </span>
               <!-- <span *ngIf="column.key === 'isBlocked'">
                 {{ getDisplayValue(item, column) }}

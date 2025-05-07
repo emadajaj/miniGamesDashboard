@@ -1,0 +1,104 @@
+
+
+<div class="game-table-container">
+  <table class="game-table">
+    <thead>
+      <tr>
+        <th *ngFor="let column of standardColumns">{{ column.name }}</th>
+      </tr>
+      <!-- Filter row directly below headers -->
+      <tr class="filter-row">
+        <td>
+          <app-bottom-pop-up [game]="game" ></app-bottom-pop-up>
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr *ngFor="let item of paginatedData">
+        <td *ngFor="let column of standardColumns">
+          <ng-container [ngSwitch]="column.type">
+            
+            <!-- Game Type with colored badge -->
+            <span *ngSwitchCase="'text'" [class.game-type-badge]="column.key === 'created'">
+              
+              <!-- Game Result with colored text -->
+              <!-- <span *ngIf="column.key === 'isBlocked'" 
+                    [ngClass]="{
+                      'success-text': item['isBlocked'] === true, 
+                      'failure-text': item['isBlocked'] === false
+                    }">
+                {{ getDisplayValue(item, column) }}
+              </span> -->
+              
+              <!-- Regular text for other text columns -->
+              <span>
+                {{ getDisplayValue(item, column) }}
+              </span>
+            </span>
+            
+            <!-- Score columns with number formatting -->
+
+            <span *ngSwitchCase="'button'" >
+              <span *ngIf="column.key === 'action'">
+                <button style="background-color: var(--card-bg); border: 0; border-radius: 5px; padding: 5px; margin-right: 20px;"><i style="font-size: 22px; color: var(--text-color-primary);" class="fa-solid fa-edit"></i></button>
+                <button style="background-color: var(--card-bg); border: 0; border-radius: 5px; padding: 5px; margin-right: 5px;"><i style="font-size: 22px; color: var(--text-color-primary);" class="fa-solid fa-trash"></i></button>
+
+              </span>
+              <!-- <span *ngIf="column.key === 'isBlocked'">
+                {{ getDisplayValue(item, column) }}
+              </span> -->
+            </span>
+
+            <span *ngSwitchCase="'image'" >
+              <span *ngIf="column.key === 'imageURL'">
+                <img [src]="item.imageURL">
+              </span>
+              <!-- <span *ngIf="column.key === 'isBlocked'">
+                {{ getDisplayValue(item, column) }}
+              </span> -->
+            </span>
+            
+            <span *ngSwitchDefault>{{ getDisplayValue(item, column) }}</span>
+          </ng-container>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
+<!-- Pagination controls -->
+<div class="pagination-container">
+  <div class="page-info">
+  </div>
+  <div class="pagination-controls">
+    <ng-container *ngIf="(currentPage$ | async) as currentPage">
+    <button class="page-button" [disabled]="currentPage === 1" (click)="goToPage(1)">&laquo;</button>
+    <button class="page-button" [disabled]="currentPage === 1" (click)="previousPage()">&lsaquo;</button>
+    <ng-container *ngIf="(pagesCount | async) as totalPages">
+      <ng-container *ngFor="let page of [].constructor(totalPages || 0); let i = index">
+        <button *ngIf="i + 1 <= 3 || i + 1 > totalPages - 2 || (i + 1 >= currentPage - 1 && i + 1 <= currentPage + 1)"
+                class="page-button" 
+                [class.active]="currentPage === (i + 1)"
+                (click)="goToPage(i + 1)">
+          {{ i + 1 }}
+        </button>
+        <button *ngIf="i + 1 === 4 && currentPage > 4" class="page-button page-ellipsis">...</button>
+        <button *ngIf="i + 1 === totalPages - 2 && currentPage < totalPages - 3" class="page-button page-ellipsis">...</button>
+      </ng-container>
+    </ng-container>
+    
+    <button class="page-button" [disabled]="(currentPage$ | async) === (pagesCount | async)" (click)="nextPage()">&rsaquo;</button>
+    <button class="page-button" [disabled]="(currentPage$ | async) === (pagesCount | async)" (click)="goToLastPage()">&raquo;</button>
+  </ng-container>
+  </div>
+  <div class="page-size">
+  </div>
+</div>
+

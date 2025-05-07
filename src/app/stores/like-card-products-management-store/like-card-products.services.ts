@@ -140,6 +140,20 @@ export class LikeCardsService {
     });
   }
 
+  addProduct(productData: any): Observable<any> {
+    const headers = this.createHeaders();
+    return this.http.post("https://extensions-test.challengex.app/api/store/products", productData, { headers });
+  }
+  
+  // getProduct(id: number): Observable<any> {
+  //   const headers = this.createHeaders();
+  //   return this.http.get<any>(`${this.apiUrl}/${id}`, { headers });
+  // }
+
+  editProduct(product: any): Observable<any> {
+    const headers = this.createHeaders();
+    return this.http.put<any>("https://extensions-test.challengex.app/api/store/products", product, { headers });
+  }
 
 
 }

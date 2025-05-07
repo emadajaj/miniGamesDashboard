@@ -1,7 +1,4 @@
-import { Component, Input, OnInit, OnChanges, SimpleChanges, HostListener, Output, EventEmitter } from '@angular/core';
-import { BehaviorSubject, filter, Observable, of } from 'rxjs';
-import { Game, GameColumn, GameData, GamesService } from '../../stores/games-managment-store/games.services';
-import { GameUsersService, UserData } from '../../stores/games-users-managment-store/games-users.services';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-pop-up',
@@ -26,7 +23,7 @@ export class PopUpComponent{
   }
 
   onYes() {
-      this.yesClicked.emit();
+    this.yesClicked.emit();
       this.hide();
   }
 

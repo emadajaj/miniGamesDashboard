@@ -1,0 +1,35 @@
+<!-- bottom-popup.component.html -->
+<div class="popup" [ngClass]="{'active': isVisible}">
+  <div class="popup-content">
+                  
+                  <div style=" font-weight: 800; margin-bottom: 50px;">
+                      <div style="text-align: center; font-size: 23px;color: var(--text-color);">Add Prize</div>
+                    </div>
+                      <form>
+                                          <!--Event Name -->
+                                          <div class="form-group" style="display: flex; align-items: center; margin-top: 20px;">
+                                              <label for="eventTitle" style="margin-right: 10px; width: 150px; text-align: start; font-size: 20px; color: var(--text-color); " >Game</label>
+                                              <!-- <input type="text" id="eventTitle" class="form-control text-filed"
+                                                      style="flex: 2;  margin-right: 10px;color: var(--text-color); background-color: var(--secondary-color);"> -->
+                                                      <select class="filter-select" style="flex: 2;  margin-right: 10px" [value]="field1">  
+                                                        <option value="">All Games</option>
+                                                        <option *ngFor="let key of (game | keyvalue)" [value]="key.key">{{ key.value }}
+                                                      </select>
+                                          </div>
+
+                                          <div class="form-group" style="display: flex; align-items: center; margin-top: 20px;">
+                                            <label  for="eventTitle" style="margin-right: 10px; font-size: 20px; width: 150px; text-align: start; color: var(--text-color); " >Image</label>
+                                            <input type="text" id="eventTitle" class="filter-select" style="flex: 2;  margin-right: 10px" [(value)]="field2"
+                                                    style="flex: 2;  margin-right: 10px;color: var(--text-color); background-color: var(--secondary-color);">
+                                        </div>
+
+                                  <button (click)="confirm()" class="btn-add" style="color: var(--text-color);" >Add</button>
+
+                      </form>
+                  
+              
+          
+</div>
+</div>
+
+<button (click)="openPopup()" class="btn">+</button>

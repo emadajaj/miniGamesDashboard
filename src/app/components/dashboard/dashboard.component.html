@@ -4,16 +4,21 @@
     <div class="sidebar-header">
       <h3>Games</h3>
     </div>
+    
     <div class="nav-tabs">
+      <a (click)="navigateTo('dashboard/metrics')" >
       <div class="nav-item" [class.active]="activeTab === 'metrics'" (click)="setActiveTab('metrics')">
         <i class="tab-icon">📊</i>
         <span class="tab-label">Metrics</span>
       </div>
+      </a>
+      <a (click)="navigateTo('dashboard/games')">
       <div class="nav-item" [class.active]="activeTab === 'arcade'" (click)="setActiveTab('arcade')">
         <i class="tab-icon">🎮</i>
         <span class="tab-label">Games</span>
       </div>
-
+      </a>
+      <a (click)="navigateTo('dashboard/games/games')">
       <div class="child-tabs" *ngIf="showArcadeChildren">
         <div class="child-nav-item" *ngFor="let game of games"
           [class.active]="activeChildTab === game.id"
@@ -22,25 +27,91 @@
           <span class="child-tab-label">{{ game.name }}</span>
         </div>
       </div>
+      </a>
+      <a (click)="navigateTo('dashboard/store')" >
       <div class="nav-item" [class.active]="activeTab === 'store'" (click)="setActiveTab('store')">
         <i class="tab-icon"><img src="gamingStore.png"></i>
         <span class="tab-label">Store</span>
       </div>
-
-      <div class="child-tabs" *ngIf="showStoreChildren">
-        <div class="child-nav-item"
-          [class.active]="activeChildTab === 'Like Cards'"
-          (click)="setActiveTab('Like Cards')">
-          <img class="child-tab-icon" src="credit-card.png">
-          <span class="child-tab-label">Like Cards</span>
+      </a>
+      <!-- store tabs -->
+      <div *ngFor="let childTab of tabss">
+      <a (click)="navigateTo(childTab.navigateTo)">
+        <div class="child-tabs" *ngIf="showStoreChildren">
+          <div class="child-nav-item"
+            [class.active]="activeChildTab === childTab.name"
+            (click)="setActiveTab(childTab.name)">
+            <img class="child-tab-icon" [src]= "childTab.imageURL" >
+            <span class="child-tab-label">{{childTab.name}}</span>
+          </div>
         </div>
-      </div>
+      </a>
+    </div>
+      <a (click)="navigateTo('dashboard/users')">
       <div class="nav-item" [class.active]="activeTab === 'users'" (click)="setActiveTab('users')">
         <i class="tab-icon">
           <img src="gamer.png">
         </i>
         <span class="tab-label">Users</span>
       </div>
+    </a>
+    <a (click)="navigateTo('dashboard/mile-stones')">
+      <div class="nav-item" [class.active]="activeTab === 'Mile Stones'" (click)="setActiveTab('Mile Stones')">
+        <i class="tab-icon">
+          <img src="gamer.png">
+        </i>
+        <span class="tab-label">Mile Stones</span>
+      </div>
+    </a>
+    <a (click)="navigateTo('dashboard/game-users-log')">
+      <div class="nav-item" [class.active]="activeTab === 'Game Users Log'" (click)="setActiveTab('Game Users Log')">
+        <i class="tab-icon">
+          <img src="gamer.png">
+        </i>
+        <span class="tab-label">Game Users Log</span>
+      </div>
+    </a>
+    <a (click)="navigateTo('dashboard/top-players-log')">
+      <div class="nav-item" [class.active]="activeTab === 'Top Players Log'" (click)="setActiveTab('Top Players Log')">
+        <i class="tab-icon">
+          <img src="gamer.png">
+        </i>
+        <span class="tab-label">Top Players Log</span>
+      </div>
+    </a>
+    <a (click)="navigateTo('dashboard/ranking-awards')">
+      <div class="nav-item" [class.active]="activeTab === 'Ranking Awards'" (click)="setActiveTab('Ranking Awards')">
+        <i class="tab-icon">
+          <img src="gamer.png">
+        </i>
+        <span class="tab-label">Ranking Awards</span>
+      </div>
+    </a>
+    <a (click)="navigateTo('dashboard/game-prizes')">
+      <div class="nav-item" [class.active]="activeTab === 'Game Prizes'" (click)="setActiveTab('Game Prizes')">
+        <i class="tab-icon">
+          <img src="gamer.png">
+        </i>
+        <span class="tab-label">Game Prizes</span>
+      </div>
+    </a>
+    <a (click)="navigateTo('dashboard/box-prizes')">
+      <div class="nav-item" [class.active]="activeTab === 'Box Prizes'" (click)="setActiveTab('Box Prizes')">
+        <i class="tab-icon">
+          <img src="gamer.png">
+        </i>
+        <span class="tab-label">Box Prizes</span>
+      </div>
+    </a>
+    <a (click)="navigateTo('dashboard/message')">
+      <div class="nav-item" [class.active]="activeTab === 'Message'" (click)="setActiveTab('Message')">
+        <i class="tab-icon">
+          <img src="gamer.png">
+        </i>
+        <span class="tab-label">Message</span>
+      </div>
+    </a>
+    
     </div>
   </div>
   <div class="content">
@@ -55,13 +126,26 @@
         <button *ngIf="noTitleDontShowTheButtons()" class="styled-button-Excel" style="margin-top: 10px; margin-bottom: 10px;">Export Excel File</button>
       </div>
     </div>
-    
     <div class="content-container">
-      <app-game-table *ngIf="isGameTab() && isGameSelected()" [game]="selectedGame!"></app-game-table>
-      <app-game-users-table *ngIf="activeTab === 'users'"></app-game-users-table> 
+      
+      <!-- <app-game-users-table *ngIf="activeTab === 'users'"></app-game-users-table> 
       <app-like-cards-table *ngIf="activeTab === 'Like Cards'"></app-like-cards-table> 
+      <app-products-table *ngIf="activeTab === 'Products'"></app-products-table>
 
-      <app-metrics-dashboard *ngIf="activeTab === 'metrics'"></app-metrics-dashboard>
+      <app-metrics-dashboard *ngIf="activeTab === 'metrics'"></app-metrics-dashboard> -->
+      <ng-container *ngIf="isGameTab() && isGameSelected(); else routerOutlet">
+        <app-game-table [game]="selectedGame!"></app-game-table>
+      </ng-container>
+      
+      <!-- <ng-container *ngIf="!isGameTab() || !isGameSelected()">
+        <app-game-settings-table [gameSettings]="selectedGameSettings!"></app-game-settings-table>
+      </ng-container> -->
+      
+      <ng-template #routerOutlet>
+        <router-outlet></router-outlet>
+      </ng-template>
+
+      
     </div>
   </div>
 </div>

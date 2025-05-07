@@ -1,9 +1,12 @@
 import { Component, OnInit, OnChanges, SimpleChanges, HostListener, ViewChild } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { GameColumn} from '../../stores/games-managment-store/games.services';
-import { GameUsersService, UserData } from '../../stores/games-users-managment-store/games-users.services';
 import { PopUpComponent } from '../popUp/pop-up.component';
 import { LikeCardData, LikeCardsService } from '../../stores/like-card-products-management-store/like-card-products.services';
+import { ToastrService } from 'ngx-toastr';
+import { Store } from '@ngrx/store';
+import { ProductActions } from '../../stores/like-card-products-management-store/action/like-card-products.action';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-like-cards-table',
@@ -13,15 +16,49 @@ import { LikeCardData, LikeCardsService } from '../../stores/like-card-products-
 })
 export class LikeCardsTableComponent implements OnInit{
 
+  constructor(private likeCardsService: LikeCardsService, private toastr: ToastrService, private store:Store , private router:Router) {}
   scoreIds!: any[];
   id:any
 
+  @ViewChild('popup') popup!: PopUpComponent;
+  popupMessage: string = '';
+  yesAction: (price:number) => void = () => {};
 
+      // Method to open the popup
+      openPopup(rowData: LikeCardData) {
+        this.scoreIds = [rowData.productId]
+        this.id = rowData.productId 
+        this.yesAction = (price) => {        
+
+          
+              const productData = {
+                id: rowData.productId,
+                categoryId: rowData.categoryId,
+                title: rowData.productName,
+                price: price,
+                imageURL: rowData.productImage
+              };
+              if(price >0 ){
+                this.toastr.success('Product Added Successfully'); // Show error message
+                this.store.dispatch(ProductActions.addProduct({ product: productData }));
+               
+              }
+              this.navigateTo()
+              console.log(productData);
+
+
+          ;}
+
+        this.popup.show();
+      }
+    
+     
 
   private currentPageSubject: BehaviorSubject<number> = new BehaviorSubject<number>(1);
   currentPage$: Observable<number> = this.currentPageSubject.asObservable(); // Observable to expose current page
   pageSize = 10;
   totalItems = 0;
+  price: number =0;
   pagesCount: Observable<number> | undefined;
   country: { [key: string]: string } = {
       'suadi_Arabia' : 'Suadi Arabia',
@@ -57,7 +94,7 @@ export class LikeCardsTableComponent implements OnInit{
         { key: 'available', name: 'Available', type: 'image' },
       ];
 
-  constructor(private likeCardsService: LikeCardsService) {}
+
 
 
   paginatedData: LikeCardData[] = [];
@@ -155,6 +192,10 @@ export class LikeCardsTableComponent implements OnInit{
         }
       });
     }
+  }
+
+  navigateTo() {
+    this.router.navigate(["dashboard/store/products"]);
   }
 
   }

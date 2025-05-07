@@ -1,4 +1,21 @@
-/* You can add global styles to this file, and also import other style files */
+/* WebKit scrollbar */
+::-webkit-scrollbar {
+  width: 3px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #c1c1c1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #6f6f6f;
+}
 
 :root {
   /* Light theme variables */

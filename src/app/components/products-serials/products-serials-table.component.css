@@ -1,0 +1,274 @@
+.styled-button-Gems {
+  font-size: 16px;
+  height: 35px;
+  width: 125px;
+  font-weight: bold;
+  color: white;
+  background-color: darkred;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.styled-button-Gems:hover {
+  background-color: red; /* Darker red on hover */
+  transform: scale(1.05); /* Slightly enlarge the button */
+}
+
+.styled-button-Awards {
+  font-size: 16px;
+  height: 35px;
+  width: 125px;
+  font-weight: bold;
+  color: white;
+  background-color: rgb(207, 155, 0);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.styled-button-Awards:hover {
+  background-color: rgba(139, 139, 2, 0.731); /* Darker red on hover */
+  transform: scale(1.05); /* Slightly enlarge the button */
+}
+
+.game-table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.game-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin-bottom: 20px;
+  table-layout: fixed;
+}
+
+.game-table th, .game-table td {
+  width: 200px;
+  min-width: 200px;
+  max-width: 200px;
+  overflow: hidden;
+  word-wrap: break-word; /* Break long words if necessary */
+}
+.game-table th {
+  background-color: var(--background-color-secondary);
+  color: var(--text-color-primary);
+  text-align: center;
+  padding: 12px 15px;
+  font-weight: 600;
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* Filter row styling */
+.filter-row td {
+  padding: 8px 12px;
+  background-color: var(--background-color-secondary);
+  border-bottom: 2px solid var(--border-color);
+  text-align: center;
+}
+
+.filter-input, .filter-select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background-color: var(--background-color-primary);
+  color: var(--text-color-primary);
+  font-size: 13px;
+}
+.filter-date{
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background-color: var(--background-color-primary);
+  color: var(--text-color-primary);
+  font-size: 13px;
+}
+
+.filter-input:focus, .filter-select:focus, .filter-date:focus {
+  outline: none;
+  border-color: var(--active-tab);
+  box-shadow: 0 0 0 2px rgba(63, 81, 181, 0.1);
+}
+
+.date-filter {
+  display: flex;
+  width: 100%;
+}
+
+.game-table td {
+  padding: 10px 15px;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-color-primary);
+  text-align: center;
+}
+
+.game-table tbody tr:hover {
+  background-color: var(--hover-bg);
+}
+
+/* Game Type Badge Styling */
+.game-type-badge {
+  text-align: center;
+}
+
+.game-type-badge span {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  width: 100px;
+  min-width: 100px;
+  max-width: 100px;
+  display: inline-block;
+  text-align: center;
+}
+
+.free-badge {
+  background-color:  #fdbe00;
+  color: white;
+}
+
+.paid-badge {
+  background-color: #4285F4;
+  color: white;
+}
+
+.ads-badge {
+  background-color: #34A853;
+  color: #333;
+}
+
+/* Game Result Text Styling */
+.success-text {
+  color: #34A853;
+  font-weight: 500;
+}
+
+.failure-text {
+  color: #EA4335;
+  font-weight: 500;
+}
+
+/* Score Styling */
+.score-value {
+  font-weight: 500;
+  text-align: center;
+  display: block;
+}
+
+.high-score {
+  color: #4285F4;
+  font-weight: 700;
+  text-align: center;
+  display: block;
+}
+
+/* Pagination styling */
+.pagination-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 30px;
+  flex-wrap: wrap;
+  gap: 16px;
+  border-top: 1px solid var(--border-color);
+}
+
+.page-info {
+  color: var(--text-color-secondary);
+  font-size: 14px;
+}
+
+.page-indicator {
+  color: var(--text-color-primary);
+  font-weight: 500;
+}
+
+.pagination-controls {
+  display: flex;
+  gap: 4px;
+}
+
+.page-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 32px;
+  padding: 0 8px;
+  background-color: var(--background-color-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  color: var(--text-color-primary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.page-button:hover:not(:disabled) {
+  background-color: var(--hover-bg);
+  border-color: var(--active-tab);
+}
+
+.page-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.page-button.active {
+  background-color: var(--active-tab);
+  color: white;
+  border-color: var(--active-tab);
+}
+
+.page-ellipsis {
+  cursor: default;
+}
+
+.page-ellipsis:hover {
+  background-color: var(--background-color-primary);
+  border-color: var(--border-color);
+}
+
+.page-size {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-color-secondary);
+  font-size: 14px;
+}
+
+.page-size-select {
+  padding: 4px 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background-color: var(--background-color-primary);
+  color: var(--text-color-primary);
+}
+
+@media (max-width: 768px) {
+  .pagination-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .pagination-controls {
+    order: 1;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .page-info {
+    order: 2;
+  }
+
+  .page-size {
+    order: 3;
+  }
+  
+}
